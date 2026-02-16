@@ -1,0 +1,101 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #eef2f7;
+      color: #1f2937;
+    }
+
+   
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .signup-btn {
+      background: #22c55e;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 60px;
+    }
+
+    .hero-text {
+      max-width: 500px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn-primary {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 2px solid #e5e7eb;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+
+    
