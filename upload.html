@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload - NexaAnalytics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="upload-page">
+
+  <!-- NAVBAR -->
+ <nav class="navbar">
+  <div class="logo">NexaAnalytics</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+
+  <!-- MAIN SECTION -->
+  <section class="upload-section">
+
+    <h1 class="fade-up">Turn Your E-Commerce Data Into Smart Decisions</h1>
+    <p class="fade-up">Upload your CSV file to generate dashboard insights.</p>
+
+    <!-- UPLOAD BOX -->
+    <div class="upload-box fade-up" onclick="document.getElementById('fileInput').click()">
+
+      <h2>Drop your CSV file here</h2>
+      <p class="sub-text">or click to browse • Supports CSV, TSV formats</p>
+
+      <div class="upload-btn-inside">
+        Choose File
+      </div>
+
+      <div class="upload-features">
+        <span>📊 Max 50MB</span>
+        <span>⚡ Instant processing</span>
+        <span>🔒 Secure</span>
+      </div>
+
+      <input type="file" id="fileInput" accept=".csv" hidden onchange="showFileName()">
+
+    </div>
+
+    <!-- FILE NAME -->
+    <p id="fileName" class="file-name"></p>
+
+    <!-- OUTSIDE BUTTON -->
+    <button class="btn-primary upload-main-btn" onclick="uploadFile()">Upload File</button>
+
+  </section>
+
+  <!-- 🔥 SCROLL SECTION (RESTORED) -->
+  <section class="info-section">
+
+    <div class="info-card">
+      <h3>⚡ Lightning Fast</h3>
+      <p>Process your data instantly with high performance.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>📊 Rich Charts</h3>
+      <p>Visualize your data using modern interactive graphs.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>🔐 Secure Data</h3>
+      <p>Your data is protected with advanced security systems.</p>
+    </div>
+
+  </section>
+
+  <!-- JS -->
+  <script>
+    function showFileName() {
+      const input = document.getElementById("fileInput");
+      const fileName = document.getElementById("fileName");
+
+      if (input.files.length > 0) {
+        fileName.textContent = "Selected file: " + input.files[0].name;
+      }
+    }
+
+    function uploadFile() {
+      const input = document.getElementById("fileInput");
+
+      if (input.files.length === 0) {
+        alert("Please select a file first!");
+      } else {
+        alert("File uploaded successfully: " + input.files[0].name);
+      }
+    }
+  </script>
+
+</body>
+</html>

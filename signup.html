@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - NexaAnalytics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">NexaAnalytics</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+<section class="auth-page">
+  <div class="auth-container">
+
+    <h1>Create Your Account</h1>
+
+    <form class="auth-form" onsubmit="return saveUser()">
+      
+      <input type="text" id="username" placeholder="Create Username" required>
+      
+      <input type="text" id="email" placeholder="Email or Phone Number" required>
+      
+      <input type="password" id="password" placeholder="Create Password" required>
+      
+      <button type="submit">Sign Up</button>
+
+    </form>
+
+    <p class="switch-text">
+      Already have an account? <a href="login.html">Login</a>
+    </p>
+
+  </div>
+
+  <script>
+    function saveUser() {
+      const username = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPass", password);
+
+      alert("Signup Successful! Now Login.");
+      window.location.href = "login.html";
+      return false;
+    }
+  </script>
+</section>
+</body>
+</html>
