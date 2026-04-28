@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #eef2f7;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      flex: 1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .charts {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+
+    .chart-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 1 1 300px;
+      min-width: 280px;
+    }
+
+    .chart-card canvas {
+      background: white;
+      width: 100%;
+      height: 280px !important;
+    }
+
+    @media (min-width: 1024px) {
+      .charts {
+        flex-wrap: nowrap;
+      }
+    }
+
+    table {
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      margin-top: 10px;
+      border-collapse: collapse;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #2563eb;
+      color: white;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>📊 Analytics Dashboard</h1>
+
+<!-- TOP CARDS -->
+<div class="cards">
+  <div class="card">
+    <h3>Total Revenue</h3>
+    <p id="revenue"></p>
+  </div>
+
+  <div class="card">
+    <h3>Orders</h3>
+    <p id="orders"></p>
+  </div>
+
+  <div class="card">
+    <h3>Customers</h3>
+    <p id="customers"></p>
+  </div>
+</div>
+
+<!-- CHARTS -->
+<div class="charts">
+  <div class="chart-card">
+    <canvas id="lineChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <canvas id="barChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <canvas id="pieChart"></canvas>
+  </div>
+</div>
+
+<!-- TOP PRODUCTS -->
+<div class="section">
+  <h2>🔥 Top Selling Products</h2>
+  <table id="topProducts"></table>
+</div>
+
+<!-- LOW PRODUCTS -->
+<div class="section">
+  <h2>⚠️ Low Performing Products</h2>
+  <table id="lowProducts"></table>
+</div>
+
+<!-- PREDICTION -->
+<div class="section">
+  <h2>🔮 Sales Prediction (Next Month)</h2>
+  <p id="prediction"></p>
+</div>
+
+<script>
+const data = JSON.parse(localStorage.getItem("dashboardData"));
+
+if (!data) {
+  alert("No data found! Please upload CSV first.");
+}
+
+// CARDS
+document.getElementById("revenue").innerText = "₹ " + data.totalSales;
+document.getElementById("orders").innerText = data.totalOrders;
+document.getElementById("customers").innerText = data.totalCustomers;
+
+// LINE CHART (Monthly Sales)
+new Chart(document.getElementById("lineChart"), {
+  type: "line",
+  data: {
+    labels: Object.keys(data.monthlySales),
+    datasets: [{
+      label: "Monthly Sales",
+      data: Object.values(data.monthlySales),
+      borderWidth: 2,
+      fill: false
+    }]
+  }
+});
+
+// BAR CHART (Daily Sales)
+new Chart(document.getElementById("barChart"), {
+  type: "bar",
+  data: {
+    labels: Object.keys(data.dailySales),
+    datasets: [{
+      label: "Daily Sales",
+      data: Object.values(data.dailySales)
+    }]
+  }
+});
+
+// PIE CHART (Category)
+new Chart(document.getElementById("pieChart"), {
+  type: "doughnut",
+  data: {
+    labels: Object.keys(data.categorySales),
+    datasets: [{
+      data: Object.values(data.categorySales)
+    }]
+  }
+});
+
+// TOP PRODUCTS TABLE
+const topTable = document.getElementById("topProducts");
+topTable.innerHTML = "<tr><th>Product</th><th>Revenue</th></tr>";
+
+data.topProducts.forEach(p => {
+  topTable.innerHTML += `<tr><td>${p[0]}</td><td>₹ ${p[1]}</td></tr>`;
+});
+
+// LOW PRODUCTS TABLE
+const lowTable = document.getElementById("lowProducts");
+lowTable.innerHTML = "<tr><th>Product</th><th>Revenue</th></tr>";
+
+data.lowPerforming.forEach(p => {
+  lowTable.innerHTML += `<tr><td>${p[0]}</td><td>₹ ${p[1]}</td></tr>`;
+});
+
+// PREDICTION
+document.getElementById("prediction").innerText = "₹ " + data.prediction;
+</script>
+
+</body>
+</html>
